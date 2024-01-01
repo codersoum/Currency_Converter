@@ -1,19 +1,21 @@
 package project;
-import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class Listbox extends Applet implements ActionListener
+public class Listbox extends Frame implements ActionListener
 {
- private Choice input,output;
- private Font f1,f2,f3,f4;
- private Label From,To;
- private TextField Amounttextfield,Outputtextfield;
- private Button Submit;
- private Label Output;
+ Choice input,output;
+ Font f1,f2,f3,f4;
+ Label From,To;
+ TextField Amounttextfield,Outputtextfield;
+ Button Submit;
+ Label Output;
  JFrame frame = new JFrame();
- public void init()
+ Listbox()
  {
+  Frame f=new Frame("Currency Converter");
+  setSize(400,400);
+  setVisible(true);
   setLayout(null);
   setBackground(Color.cyan);
   f1 = new Font("Classic",Font.BOLD,25);
@@ -22,43 +24,43 @@ public class Listbox extends Applet implements ActionListener
   f4 =new Font("Aerial",Font.BOLD,20);
   Label Currencyconverter=new Label("CURRENCY CONVERTER\n");
   Currencyconverter.setFont(f1);
-  Currencyconverter.setBounds(80,20,800,30);
+  Currencyconverter.setBounds(60,40,800,30);
   Label Amount=new Label("Amount:\n");
   Amount.setFont(f2);
-  Amount.setBounds(20,65,80, 25);
+  Amount.setBounds(20,85,80,25);
   Amounttextfield=new TextField(30);
-  Amounttextfield.setBounds(120,70, 110, 20);
+  Amounttextfield.setBounds(120,87, 110, 20);
   Amounttextfield.setEditable(true);
   From=new Label("From Currency:");
   From.setFont(f2);
-  From.setBounds(20,120,140, 24);
+  From.setBounds(20,140,140, 24);
   input= new Choice();
   input.add("Indian Rupees(INR)");
   input.add("Euros(EUR)");
   input.add("US Dollars(USD)");
   input.add("Great Britain Pounds(GBP)");
   input.add("Kuwaiti Dinar(KWD)");
-  input.setBounds(170,125, 150, 20);
+  input.setBounds(170,140, 150, 20);
   To=new Label("To Currency:");
   To.setFont(f2);
-  To.setBounds(20,180,130,26);
+  To.setBounds(20,200,130,26);
   output= new Choice();
   output.add("Indian Rupees(INR)");
   output.add("Euros(EUR)");
   output.add("US Dollars(USD)");
   output.add("Great Britain Pounds(GBP)");
   output.add("Kuwaiti Dinar(KWD)");
-  output.setBounds(150,185,150,20);
+  output.setBounds(170,205,150,20);
   Submit = new Button("Submit");
   Submit.setSize(500,500);
-  Submit.setBounds(100, 250, 80, 20);
+  Submit.setBounds(100, 270, 80, 20);
   Submit.addActionListener(this);
   Output=new Label("OUTPUT:");
   Output.setFont(f2);
-  Output.setBounds(30, 300, 100, 20);
+  Output.setBounds(30, 320, 100, 20);
   Outputtextfield= new TextField(25);
   Outputtextfield.setEditable(false);
-  Outputtextfield.setBounds(150, 300, 150, 20);
+  Outputtextfield.setBounds(150, 320, 150, 20);
   add(Currencyconverter);
   add(Amount);
   add(Amounttextfield);
@@ -69,7 +71,18 @@ public class Listbox extends Applet implements ActionListener
   add(Submit);
   add(Output);
   add(Outputtextfield);
+  addWindowListener(new WindowAdapter() 
+  {
+    public void windowClosing(WindowEvent e)
+	{
+	  dispose();
+	}
+  });
  }
+  public static void main(String[] args)
+  {
+	new Listbox();
+  }
 @Override
  public void actionPerformed(ActionEvent ae) 
  {
@@ -81,7 +94,7 @@ public class Listbox extends Applet implements ActionListener
 	 try
 	 {
 	  n=Double.parseDouble(s3);
-	  if(n<0)
+	  if(n<0 && n==-0.0)
 	  {
 	   JOptionPane.showMessageDialog(frame,"Input recognizes positive numbers only!","Error Message Box",JOptionPane.ERROR_MESSAGE);
 	  }
